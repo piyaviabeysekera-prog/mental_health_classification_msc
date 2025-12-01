@@ -5,6 +5,8 @@ that maps phase names to functions.
 """
 from __future__ import annotations
 from .composites import run_phase_B
+from .baselines import run_phase_C
+
 
 import argparse
 import logging
@@ -164,11 +166,22 @@ def phase_B_composites() -> None:
     print(f"Phase B completed. Enriched dataframe shape: {df.shape}")
 
 
+def phase_C_loso_baselines() -> None:
+    """
+    To invoke the LOSO folding, scaling, shuffle control and baseline
+    training routine, so that a single phase identifier triggers the
+    full baseline modelling setup for the purposes of evaluating model
+    validity in this project.
+    """
+    run_phase_C()
+
+
 def run_pipeline(selected_phases: List[str]) -> None:
     phase_map: Dict[str, Callable] = {
         "phase_0": phase_0_scaffolding,
         "phase_A": phase_A_ingestion_and_eda,
         "phase_B": phase_B_composites,
+        "phase_C": phase_C_loso_baselines,
     }
 
     for phase_name in selected_phases:
@@ -190,6 +203,7 @@ if __name__ == "__main__":
     utils.init_basic_logging()
     logging.info(f"Requested phases: {args.phases}")
     run_pipeline(args.phases)
+
 
 
 

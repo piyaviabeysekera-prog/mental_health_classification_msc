@@ -1,0 +1,13 @@
+{
+  "timestamp_utc": "2025-12-01T13:13:29.546858Z",
+  "phase": "phase_C_loso_scaling_baselines",
+  "status": "success",
+  "git_hash": "51928a9312cab330da523892b3fba411d7390013",
+  "details": {
+    "n_rows": 1178,
+    "n_columns": 69,
+    "n_subjects": 15,
+    "shuffle_control_path": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\shuffle_control.csv",
+    "baselines_path": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\loso_baselines.csv"
+  }
+}
