@@ -1,0 +1,11 @@
+{
+  "timestamp_utc": "2025-12-01T10:25:11.630744Z",
+  "phase": "phase_A_ingestion_and_eda",
+  "status": "success",
+  "git_hash": "d04b00b05aad8ad781d7673835d220eb7fdd95d5",
+  "details": {
+    "n_rows": 1178,
+    "n_columns": 59,
+    "n_range_violations": 2
+  }
+}

@@ -1,0 +1,70 @@
+feature_name,feature_type,description
+net_acc_mean,raw_feature,Raw or precomputed feature from merged.csv.
+net_acc_std,raw_feature,Raw or precomputed feature from merged.csv.
+net_acc_min,raw_feature,Raw or precomputed feature from merged.csv.
+net_acc_max,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_x_mean,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_x_std,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_x_min,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_x_max,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_y_mean,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_y_std,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_y_min,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_y_max,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_z_mean,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_z_std,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_z_min,raw_feature,Raw or precomputed feature from merged.csv.
+ACC_z_max,raw_feature,Raw or precomputed feature from merged.csv.
+BVP_mean,raw_feature,Raw or precomputed feature from merged.csv.
+BVP_std,raw_feature,Raw or precomputed feature from merged.csv.
+BVP_min,raw_feature,Raw or precomputed feature from merged.csv.
+BVP_max,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_mean,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_std,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_min,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_max,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_phasic_mean,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_phasic_std,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_phasic_min,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_phasic_max,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_smna_mean,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_smna_std,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_smna_min,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_smna_max,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_tonic_mean,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_tonic_std,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_tonic_min,raw_feature,Raw or precomputed feature from merged.csv.
+EDA_tonic_max,raw_feature,Raw or precomputed feature from merged.csv.
+Resp_mean,raw_feature,Raw or precomputed feature from merged.csv.
+Resp_std,raw_feature,Raw or precomputed feature from merged.csv.
+Resp_min,raw_feature,Raw or precomputed feature from merged.csv.
+Resp_max,raw_feature,Raw or precomputed feature from merged.csv.
+TEMP_mean,raw_feature,Raw or precomputed feature from merged.csv.
+TEMP_std,raw_feature,Raw or precomputed feature from merged.csv.
+TEMP_min,raw_feature,Raw or precomputed feature from merged.csv.
+TEMP_max,raw_feature,Raw or precomputed feature from merged.csv.
+BVP_peak_freq,raw_feature,Raw or precomputed feature from merged.csv.
+TEMP_slope,raw_feature,Raw or precomputed feature from merged.csv.
+subject,identifier,Subject identifier.
+label,target,Window-level class label.
+age,raw_feature,Raw or precomputed feature from merged.csv.
+height,raw_feature,Raw or precomputed feature from merged.csv.
+weight,raw_feature,Raw or precomputed feature from merged.csv.
+gender_ female,raw_feature,Raw or precomputed feature from merged.csv.
+gender_ male,raw_feature,Raw or precomputed feature from merged.csv.
+coffee_today_YES,raw_feature,Raw or precomputed feature from merged.csv.
+sport_today_YES,raw_feature,Raw or precomputed feature from merged.csv.
+smoker_NO,raw_feature,Raw or precomputed feature from merged.csv.
+smoker_YES,raw_feature,Raw or precomputed feature from merged.csv.
+feel_ill_today_YES,raw_feature,Raw or precomputed feature from merged.csv.
+z_phasic_amp,raw_feature,Raw or precomputed feature from merged.csv.
+z_spike_proxy,raw_feature,Raw or precomputed feature from merged.csv.
+SRI,composite,"Stress Reactivity Index: product of z-scored EDA_phasic_mean and EDA_phasic_std, representing intensity x variability of phasic EDA per window."
+z_EDA_tonic_std,raw_feature,Raw or precomputed feature from merged.csv.
+z_TEMP_slope,raw_feature,Raw or precomputed feature from merged.csv.
+RS,composite,"Recovery Speed: inverse recovery proxy derived from z-scored EDA_tonic_std and TEMP_slope, where higher values indicate faster and more stable return towards baseline."
+EDA_mean_diff,raw_feature,Raw or precomputed feature from merged.csv.
+BVP_mean_diff,raw_feature,Raw or precomputed feature from merged.csv.
+TEMP_mean_diff,raw_feature,Raw or precomputed feature from merged.csv.
+net_acc_mean_diff,raw_feature,Raw or precomputed feature from merged.csv.
+PL,composite,"Physiological Lability: mean squared first difference across EDA_mean, BVP_mean, TEMP_mean and net_acc_mean within each subject, capturing short-term volatility in physiology."
