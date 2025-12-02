@@ -1,4 +1,4 @@
-wwww5"""Main pipeline entrypoint for the project.
+"""Main pipeline entrypoint for the project.
 
 Defines phases and exposes `run_pipeline` to execute them.
 """
@@ -7,6 +7,9 @@ from __future__ import annotations
 from .composites import run_phase_B
 from .baselines import run_phase_C
 from .ensembles import run_phase_D
+from .explainability import (
+    phase_E_explainability_and_sensitivity,
+)
 
 import argparse
 import logging
@@ -16,6 +19,7 @@ from typing import Callable, Dict, List
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 
 from .config import (
     ROOT_DIR,
@@ -68,6 +72,15 @@ def phase_C_loso_baselines() -> None:
 def phase_D_ensembles() -> None:
     run_phase_D()
 
+def phase_E() -> None:
+    """
+    To delegate to the dedicated explainability and sensitivity phase so that
+    Phase E can be invoked from the generic pipeline runner for the purposes
+    of SHAP-based interpretation and composite robustness analysis in this
+    project.
+    """
+    phase_E_explainability_and_sensitivity()
+
 
 def run_pipeline(selected_phases: List[str]) -> None:
     phase_map: Dict[str, Callable] = {
@@ -76,7 +89,10 @@ def run_pipeline(selected_phases: List[str]) -> None:
         "phase_B": phase_B_composites,
         "phase_C": phase_C_loso_baselines,
         "phase_D": phase_D_ensembles,
+        "phase_E": phase_E_explainability_and_sensitivity,  # or phase_E if you used the wrapper
     }
+   
+
 
     for phase_name in selected_phases:
         if phase_name not in phase_map:
@@ -291,6 +307,7 @@ def run_pipeline(selected_phases: List[str]) -> None:
         "phase_B": phase_B_composites,
         "phase_C": phase_C_loso_baselines,
         "phase_D": phase_D_ensembles,
+        "phase_E": phase_E_explainability_and_sensitivity,
     }
 
     for phase_name in selected_phases:
@@ -573,6 +590,7 @@ def run_pipeline(selected_phases: List[str]) -> None:
         "phase_B": phase_B_composites,
         "phase_C": phase_C_loso_baselines,
         "phase_D": phase_D_ensembles,
+        "phase_E": phase_E_explainability_and_sensitivity,
     }
 
     for phase_name in selected_phases:
