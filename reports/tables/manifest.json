@@ -1,0 +1,26 @@
+{
+  "generated_at_utc": "2025-12-02T13:41:56.644878Z",
+  "git_hash": "00b4a40b63a2fbab69796023ae306805e7b25df4",
+  "final_tables_dir": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\thesis_final",
+  "final_figures_dir": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\figures\\thesis_final",
+  "tables": [
+    "loso_baselines.csv",
+    "ensembles_per_fold.csv",
+    "calibration.csv",
+    "tiers_costs.csv",
+    "feature_family_ablation.csv",
+    "sensitivity.csv",
+    "shap_top_features.csv",
+    "fairness_summary.csv",
+    "reject_stats.csv"
+  ],
+  "figures": [
+    "eda_distributions.png",
+    "corr_heatmap.png",
+    "composites_by_label.png",
+    "feature_family_bar.png",
+    "calibration_plots.png",
+    "shap_global.png",
+    "sensitivity_spider.png"
+  ]
+}
