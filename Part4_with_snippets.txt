@@ -1,0 +1,163 @@
+Part 4 — Data Preparation (Corrected + Code Snippets)
+
+This file contains the corrected Data Preparation text aligned to the repository implementation, plus short, copy-ready code snippets from the project that you can cite in the thesis.
+
+---
+1) Configuration (paths, seed, physiological ranges)
+
+File: `code/config.py`
+
+Snippet:
+
+PHYSIO_RANGES = {
+    "EDA_min": 0.0,           # microsiemens, EDA should not be negative
+    "TEMP_min": 30.0,         # degrees Celsius, plausible lower bound
+    "TEMP_max": 40.0,         # degrees Celsius, plausible upper bound
+    "BVP_freq_min": 0.8,      # Hz, lower heart rate surrogate bound (~48 bpm)
+    "BVP_freq_max": 2.5,      # Hz, upper heart rate surrogate bound (~150 bpm)
+}
+
+MERGED_CSV_PATH = DATA_DIR / "emoma_csv" / "merged.csv"
+
+Default random seed: `RANDOM_SEED = 42`.
+
+---
+2) Per-fold imputation and scaling (LOSO baselines)
+
+File: `code/baselines.py`
+
+Key snippet (per-fold train-only imputer + scaler):
+
+# Per-fold imputer + scaler (train only)
+imputer = SimpleImputer(strategy="mean")
+X_train_imp = imputer.fit_transform(X_train)
+X_test_imp = imputer.transform(X_test)
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train_imp)
+X_test_scaled = scaler.transform(X_test_imp)
+
+# Saved as:
+# models/scalers/imputer_fold_{fold_id}.pkl
+# models/scalers/scaler_fold_{fold_id}.pkl
+
+Notes: imputer uses `strategy='mean'`. Both imputer and scaler are FIT only on training data to avoid leakage.
+
+---
+3) Ensemble creation and calibration
+
+File: `code/ensembles.py`
+
+Voting ensemble (soft votes of RF + XGB):
+
+voting = VotingClassifier(estimators=[("rf", rf), ("xgb", xgb)], voting="soft")
+
+Calibration (per-fold):
+
+calib = CalibratedClassifierCV(estimator=voting, method="isotonic", cv=3)
+calib.fit(X_train_scaled, y_train)
+
+Saved calibrators (per fold) under `models/ensembles/`.
+
+Note: The repository uses isotonic calibration (`method='isotonic'`, `cv=3`).
+
+---
+4) Fairness: cross-validated OOF probabilities & RF builder
+
+File: `code/fairness_packaging.py`
+
+RF builder:
+
+return RandomForestClassifier(
+    n_estimators=400,
+    max_depth=None,
+    min_samples_split=2,
+    min_samples_leaf=1,
+    n_jobs=-1,
+    random_state=RANDOM_SEED,
+    class_weight="balanced_subsample",
+)
+
+Out-of-fold probability estimates:
+
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_SEED)
+proba = cross_val_predict(
+    rf,
+    X,
+    y,
+    cv=cv,
+    method="predict_proba",
+    n_jobs=-1,
+    verbose=0,
+)
+
+Per-sample fields stored: `prob_class2 = proba[:, 2]` and `pred_label = argmax(proba, axis=1)`.
+
+Per-subject aggregation (uncertainty proxy): groupby subject → compute `n_windows`, `subject_accuracy`, `mean_prob_class2`, `var_prob_class2`, `std_prob_class2`, `mean_true_label`. Written to `reports/tables/fairness_summary.csv`.
+
+Reject-option bands (defaults): `[(0.45, 0.55), (0.40, 0.60), (0.35, 0.65)]` and results written to `reports/tables/reject_stats.csv`.
+
+---
+5) Explainability (SHAP) snippet
+
+File: `code/explainability.py`
+
+RandomForest used for explainability:
+
+def build_rf_model(random_state: int = RANDOM_SEED) -> RandomForestClassifier:
+    return RandomForestClassifier(
+        n_estimators=400,
+        max_depth=None,
+        min_samples_split=2,
+        min_samples_leaf=1,
+        n_jobs=-1,
+        random_state=random_state,
+        class_weight="balanced_subsample",
+    )
+
+SHAP usage (TreeExplainer):
+
+explainer = shap.TreeExplainer(rf)
+shap_values = explainer.shap_values(X_sample)
+# mean absolute SHAP per feature -> `shap_top_features.csv`
+
+Sampling for SHAP: uses `StratifiedShuffleSplit` to limit `max_samples` when the dataset is large.
+
+---
+6) File outputs you can cite directly (paths)
+
+Tables (under `reports/tables/`):
+- loso_folds.csv
+- loso_baselines.csv
+- shuffle_control.csv
+- ensembles_per_fold.csv
+- calibration.csv
+- tiers_costs.csv
+- feature_family_ablation.csv
+- sensitivity.csv
+- shap_top_features.csv
+- fairness_summary.csv
+- reject_stats.csv
+- manifest.json (reports/tables/manifest.json)
+
+Figures (under `reports/figures/`):
+- eda_distributions.png
+- corr_heatmap.png
+- composites_by_label.png
+- feature_family_bar.png
+- calibration_plots.png
+- roc_pr_curves.png (if produced)
+- shap_global.png
+- sensitivity_spider.png
+
+---
+7) Suggested short thesis wording (ready to paste)
+
+"Data were preprocessed using per-fold mean imputation (`SimpleImputer(strategy='mean')`) and standard scaling (`StandardScaler`) fitted only on training data to avoid leakage. Models were evaluated using a Leave-One-Subject-Out (LOSO) scheme. A VotingClassifier ensemble (RandomForest + XGBoost) was calibrated using isotonic regression (`CalibratedClassifierCV(method='isotonic', cv=3)`) and risk tiers derived from calibrated high-risk probabilities. Explainability was performed with SHAP TreeExplainer on a RandomForest, and fairness/uncertainty was assessed using out-of-fold probabilistic estimates aggregated per subject (variance of class-2 probability)."
+
+---
+Notes:
+- The snippets above are intentionally short to be citation-friendly; if you want full function blocks with exact line ranges, I can append complete code blocks for each referenced function and include their exact line numbers in a Markdown file instead.
+- I verified these snippets from `code/config.py`, `code/baselines.py`, `code/ensembles.py`, `code/fairness_packaging.py`, and `code/explainability.py` on December 7, 2025.
+
+End of file.

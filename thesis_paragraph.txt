@@ -1,0 +1,6 @@
+Data were preprocessed using per-fold mean imputation (`SimpleImputer(strategy='mean')`) and standard scaling (`StandardScaler`) fitted only on training data to avoid leakage. Models were evaluated using a Leave-One-Subject-Out (LOSO) scheme. A `VotingClassifier` ensemble (RandomForest + XGBoost) was calibrated using isotonic regression (`CalibratedClassifierCV(method='isotonic', cv=3)`) and risk tiers were derived from calibrated high-risk probabilities. Explainability was performed with SHAP TreeExplainer on a RandomForest, and fairness/uncertainty was assessed using out-of-fold probabilistic estimates aggregated per subject (variance of class-2 probability).
+
+Description:
+- This single-paragraph summary is intended for inclusion in the Methods section to concisely describe preprocessing, evaluation, calibration, explainability and fairness analyses used in the project.
+- For reproducibility and citation, refer to the implementation files: `code/config.py`, `code/baselines.py`, `code/ensembles.py`, `code/explainability.py`, and `code/fairness_packaging.py`.
+- The full, detailed step-by-step description and code snippets are available in `Part4_corrected.txt` and `Part4_with_snippets.txt` in the repository root.

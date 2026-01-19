@@ -1,4 +1,4 @@
-# Code Snippet Index for Thesis Write-Up
+ i# Code Snippet Index for Thesis Write-Up
 
 **Purpose**: Quick lookup table mapping each phase to relevant source files (with line ranges) and output files.  
 **How to use**: For each phase section in your thesis, refer to the code lines listed here, copy them into your write-up, and cite the files.

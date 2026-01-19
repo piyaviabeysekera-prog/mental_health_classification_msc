@@ -134,7 +134,7 @@ If you prefer to run the existing per-phase runner scripts present in the repo r
 
 If you want, I can:
 
-- Expand the README with sample command lines for each preserved `run_phase*.py` file present in the repository root.
+- Expa.nd the README with sample command lines for each preserved `run_phase*.py` file present in the repository root.
 - Create a concise `requirements.txt` or Dockerfile for reproducible runs.
 - Produce a one-page summary slide that maps each phase to the key figures/tables you should show in your viva.
 
