@@ -1,0 +1,25 @@
+{
+  "timestamp_utc": "2026-01-19T15:56:07.521605Z",
+  "phase": "phase_G_heterogeneous_ensemble",
+  "status": "success",
+  "git_hash": "15f51b4c32698a6eb3cc6380581ed3fd0e927e88",
+  "details": {
+    "n_rows": 1178,
+    "n_features": 67,
+    "n_subjects": 15,
+    "n_folds": 15,
+    "models_trained": [
+      "LogisticRegression",
+      "RandomForest",
+      "XGBoost",
+      "ExtraTrees"
+    ],
+    "individual_summary_path": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\phase_G_individual_performance.csv",
+    "ensemble_summary_path": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\phase_G_ensemble_performance.csv",
+    "individual_fold_metrics_path": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\phase_G_individual_fold_metrics.csv",
+    "ensemble_fold_metrics_path": "C:\\Users\\Piyavi Abeysekera\\Desktop\\Quantum Thief Academia\\Final Year project\\FYP ML Model Code\\reports\\tables\\phase_G_ensemble_fold_metrics.csv",
+    "xgboost_available": true,
+    "lightgbm_available": false,
+    "catboost_available": false
+  }
+}
