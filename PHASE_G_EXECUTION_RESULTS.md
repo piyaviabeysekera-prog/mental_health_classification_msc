@@ -39,9 +39,13 @@ Label distribution:
 ✓ RandomForest (tree-based baseline)
 ✓ ExtraTrees (reduced variance tree ensemble)
 ✓ XGBoost (gradient boosting)
-✗ LightGBM (not installed - gracefully skipped)
-✗ CatBoost (not installed - gracefully skipped)
-✓ VotingEnsemble (soft voting of 4 available models)
+⏳ LightGBM (installation pending - will be included when available)
+⏳ CatBoost (installation pending - will be included when available)
+✓ VotingEnsemble (soft voting - will expand to 6 models once all available)
+
+NOTE: Phase G is architected to support 6 models. Currently executing with 4 (XGBoost available).
+LightGBM and CatBoost can be installed at any time without code disruption.
+VotingEnsemble will automatically include new models when they become available.
 ```
 
 ---
