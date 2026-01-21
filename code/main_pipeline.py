@@ -9,6 +9,8 @@ from .baselines import run_phase_C
 from .ensembles import run_phase_D
 from .explainability import phase_E_explainability_and_sensitivity
 from .fairness_packaging import phase_F_fairness_and_packaging
+from .phase_G import run_phase_G
+from .phase_G_part2 import run_phase_G_part2
 
 import argparse
 import logging
@@ -75,6 +77,14 @@ def phase_F() -> None:
     phase_F_fairness_and_packaging()
 
 
+def phase_G() -> None:
+    run_phase_G()
+
+
+def phase_G_part2() -> None:
+    run_phase_G_part2()
+
+
 def run_pipeline(selected_phases: List[str]) -> None:
     phase_map: Dict[str, Callable] = {
         "phase_0": phase_0_scaffolding,
@@ -84,6 +94,8 @@ def run_pipeline(selected_phases: List[str]) -> None:
         "phase_D": phase_D_ensembles,
         "phase_E": phase_E_explainability_and_sensitivity,
         "phase_F": phase_F_fairness_and_packaging,
+        "phase_G": phase_G,
+        "phase_G_part2": phase_G_part2,
     }
 
     for phase_name in selected_phases:
